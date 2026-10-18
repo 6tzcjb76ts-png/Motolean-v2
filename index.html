@@ -1,0 +1,157 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090607"><title>MotoLean</title>
+<style>
+:root{--g:#ff3038;--bg:#090607}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#12442a,#07110b 35%,#030504 80%);color:#f5fff8;font-family:-apple-system,BlinkMacSystemFont,sans-serif}header{text-align:center;padding:calc(env(safe-area-inset-top) + 14px) 12px 15px;background:#030605e8;border-bottom:1px solid #24583c;position:sticky;top:0}.logo{font-size:32px;font-weight:950;font-style:italic;letter-spacing:2px;text-shadow:0 0 20px #36ff7b88}.logo span{color:var(--g)}.tagline{font-size:9px;letter-spacing:3px;color:#a4c4b0}main{max-width:680px;margin:auto;padding:14px 13px calc(env(safe-area-inset-bottom) + 80px)}.card{background:linear-gradient(145deg,#111d18f5,#060a08f8);border:1px solid #2e7049;border-radius:22px;padding:15px;margin-bottom:13px;box-shadow:0 12px 30px #0008}.label{font-size:10px;font-weight:900;letter-spacing:2px;color:#b0cfbc;margin:5px 4px 10px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field label{display:block;font-size:9px;letter-spacing:1px;color:#a4c7b1;margin:0 0 6px 3px}.field select,.field input{width:100%;min-width:0;padding:12px 8px;border-radius:12px;border:1px solid #326a49;background:#030806;color:#fff;font-size:13px}.bike{display:flex;gap:12px;align-items:center;padding:12px;margin-top:12px;border:1px solid #2a6040;border-radius:14px;background:#0b2517}.bike span{font-size:30px}.bike small{display:block;color:#b5cbbb;margin-top:3px}.status{display:flex;justify-content:space-between;color:#adc5b6;font-size:11px}.led{display:inline-block;width:7px;height:7px;background:#66756b;border-radius:50%;margin-right:7px}.led.on{background:var(--g);box-shadow:0 0 9px var(--g)}svg{display:block;width:min(88vw,360px);margin:5px auto}.angle{font-size:52px;font-weight:900;fill:#f5fff8}.sub{font-size:10px;letter-spacing:2px;fill:#a6bcae}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.metric{text-align:center;background:#030806;border:1px solid #204a32;border-radius:12px;padding:10px 3px}.metric b{display:block;font-size:19px;color:var(--g)}.metric small{font-size:8px;letter-spacing:.5px;color:#a9bdb0}button{font-family:inherit;cursor:pointer;background:linear-gradient(135deg,#10301d,#07100a);color:white;border:1px solid #398453;border-radius:14px;padding:13px 8px;min-height:48px;font-size:11px;font-weight:900;box-shadow:0 5px 15px #0005}button.primary{background:linear-gradient(130deg,#6dffa5,#0bc35d);color:#031208}.actions,.tiles{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0 16px}.tile{text-align:left;min-height:98px}.tile i{display:block;font-style:normal;font-size:23px;margin-bottom:7px}.tile small{display:block;color:#a6b9ac;font-weight:500;margin-top:4px;line-height:1.4}.hint,.info{font-size:11px;line-height:1.55;color:#aec1b4}.log{white-space:pre-wrap;max-height:130px;overflow:auto;background:#030705;padding:10px;border-radius:10px;color:#baf4ce;font:11px monospace}footer{position:fixed;bottom:0;left:0;right:0;background:#030605ed;border-top:1px solid #20432e;display:flex;justify-content:space-around;padding:9px 10px calc(env(safe-area-inset-bottom) + 8px);font-size:9px;color:#a8bdaf}footer span{text-align:center}footer b{display:block;font-size:17px;color:var(--g)}.pill{color:var(--g);border:1px solid #3b8052;border-radius:20px;padding:4px 8px;font-size:9px}
+</style><script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script><style id="sinTerminarTheme">
+:root{color-scheme:dark;--g:#ff3038;--bg:#090607}html,body{background:#090607!important;color:#f7f4f4}body{position:relative;isolation:isolate}body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(0,0,0,.80),rgba(0,0,0,.86)),url('./sin-terminar-logo.jpeg');background-size:cover;background-position:center;background-repeat:no-repeat}button.primary,.primary{background:linear-gradient(135deg,#ff3038,#a90d18)!important;color:#fff!important;border-color:#ff5961!important}.card,.tile,.metric,.bike,.actions button{border-color:rgba(255,48,56,.42)!important}.label{color:#ff5961!important}#moto3d{background:transparent!important;border:0!important;outline:0!important;box-shadow:none!important}a{color:#ff7379}</style>
+<style id="leanBikeUI">
+:root{color-scheme:dark;--lb-red:#ff2735;--lb-green:#28f06c;--lb-blue:#168bff}
+body{background:#02040a!important;color:#f7f7f7!important}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(0,0,0,.87),rgba(0,0,0,.93)),url('./sin-terminar-logo.jpeg');background-size:cover;background-position:center;background-repeat:no-repeat}
+.card,.tile,.metric,.bike,.actions button{border-color:rgba(255,255,255,.18)!important}
+button.primary,.primary{background:linear-gradient(135deg,#ff2735,#a50d1a)!important;color:#fff!important}
+.lb-hero{position:relative;padding:12px 9px 7px;margin:8px 0 14px;border:1px solid #1c2e49;border-radius:20px;background:radial-gradient(ellipse at 50% 70%,rgba(0,72,153,.26),rgba(0,0,0,.62) 65%);overflow:hidden}
+.lb-head{display:flex;justify-content:space-between;align-items:center;font-weight:800;letter-spacing:.06em;font-size:12px;color:#dce9ff;margin-bottom:8px}.lb-head span:last-child{color:#55a8ff}
+.lb-stage{display:grid;grid-template-columns:42px minmax(0,1fr) 42px;gap:4px;align-items:stretch;min-height:280px}
+.lb-scale{display:flex;flex-direction:column;justify-content:space-between;align-items:center;color:#d7dce4;font-size:11px;padding:20px 0 14px;position:relative}.lb-scale:after{content:"";position:absolute;top:24px;bottom:18px;right:5px;width:2px;background:repeating-linear-gradient(to bottom,#8793a3 0 2px,transparent 2px 10px);opacity:.8}.lb-scale.right:after{left:5px;right:auto}.lb-scale b{z-index:1;background:#070b12;padding:2px 0}
+.lb-model{position:relative;display:flex;align-items:center;justify-content:center;min-width:0}.lb-model model-viewer{width:100%;height:290px;background:transparent!important;--poster-color:transparent;--progress-bar-color:transparent;border:0!important;outline:0!important;box-shadow:none!important;transition:filter .1s linear}
+.lb-pointer{position:absolute;top:50%;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;z-index:4;display:block!important;border-color:transparent!important;filter:drop-shadow(0 0 6px #28f06c);transition:top .08s linear,filter .08s linear}
+.lb-pointer.left{left:0;border-right:22px solid #28f06c!important}.lb-pointer.right{right:0;border-left:22px solid #28f06c!important}
+.lb-pointer.left::after,.lb-pointer.right::after{content:"";position:absolute;top:-5px;width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent}
+.lb-pointer.left::after{left:5px;border-left:8px solid #28f06c}.lb-pointer.right::after{right:5px;border-right:8px solid #28f06c}
+.lb-model model-viewer{transform-origin:center center;transition:filter .08s linear}
+
+.lb-ground{height:38px;border:1px solid #1d5a98;border-radius:50%;margin:-6px 3px 8px;background:radial-gradient(ellipse,rgba(0,97,210,.25),transparent 70%)}
+.lb-readings{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:0 4px 12px}.lb-reading{text-align:center;padding:4px 8px 10px}.lb-reading:first-child{border-right:1px solid #526070}.lb-reading label{display:block;font-size:11px;letter-spacing:.06em;color:#c6d0dc;margin-bottom:4px}.lb-reading strong{display:block;font-size:clamp(34px,10vw,52px);line-height:1;font-weight:900}.lb-reading.left strong{color:var(--lb-red);text-shadow:0 0 12px #ff273544}.lb-reading.right strong{color:var(--lb-green);text-shadow:0 0 12px #28f06c44}.lb-underline{height:3px;width:72%;margin:10px auto 0;background:linear-gradient(90deg,transparent,currentColor,transparent)}
+.lb-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}.lb-stat{border:1px solid #28313d;border-radius:15px;background:linear-gradient(150deg,rgba(19,25,35,.94),rgba(4,7,12,.95));padding:12px 6px;text-align:center;min-width:0}.lb-stat small{display:block;font-size:10px;color:#b8c1cc;min-height:25px}.lb-stat b{font-size:25px;display:block;color:#f4f7fb}.lb-stat .red{color:var(--lb-red)}.lb-stat .green{color:var(--lb-green)}
+@media(min-width:600px){.lb-stage{min-height:380px}.lb-model model-viewer{height:390px}.lb-scale{font-size:14px}}
+</style>
+
+<style id="leanColorBands">
+.lb-scale:after{width:4px!important;background:linear-gradient(to bottom,#ff3038 0%,#ff3038 33%,#ff9f1c 33%,#ff9f1c 66%,#27ed70 66%,#27ed70 100%)!important;opacity:.95!important;border-radius:4px}.lb-pointer.left,.lb-pointer.right{transition:border-color .08s linear;filter:drop-shadow(0 0 5px currentColor)}.lb-legend{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;font-size:10px;color:#e5e7eb;margin:2px 0 8px}.lb-legend span{display:flex;align-items:center;gap:4px}.lb-dot{width:8px;height:8px;border-radius:50%;display:inline-block}.lb-dot.green{background:#27ed70}.lb-dot.orange{background:#ff9f1c}.lb-dot.red{background:#ff3038}.lb-scale b{background:transparent!important;text-shadow:0 1px 4px #000}
+</style>
+
+<style id="calibrationButtonsUpdate">
+/* Botones de calibración: geometría cuadrada y paleta del inclinómetro LeanBike */
+#cal, #handlebar {
+  border-radius: 4px !important;
+  border: 1px solid #ff3038 !important;
+  background: linear-gradient(135deg, #191b20 0%, #090a0d 58%, #351015 100%) !important;
+  color: #fff !important;
+  box-shadow: inset 0 0 0 1px rgba(255,48,56,.12), 0 0 10px rgba(255,48,56,.15) !important;
+  text-transform: uppercase;
+  letter-spacing: .35px;
+}
+#cal:active, #handlebar:active {
+  background: linear-gradient(135deg, #ff3038, #a50d1a) !important;
+  border-color: #ff7379 !important;
+  transform: translateY(1px);
+}
+#cal:focus-visible, #handlebar:focus-visible {
+  outline: 2px solid #ff9f1c !important;
+  outline-offset: 2px;
+}
+</style>
+
+<style id="singleLeanBikePanel">
+/* Un solo panel de inclinación: controles integrados en LeanBike */
+#leanBikePanel{border-color:rgba(255,39,53,.55);background:radial-gradient(ellipse at 50% 70%,rgba(0,72,153,.22),rgba(0,0,0,.76) 68%)}
+.lb-controls{margin:12px 4px 8px!important;gap:8px!important}
+.lb-controls button{border-radius:4px!important;border:1px solid #ff3038!important;background:linear-gradient(135deg,#171a20,#080a0e 62%,#310d13)!important;color:#fff!important;min-height:46px;box-shadow:inset 0 0 0 1px rgba(255,48,56,.1),0 4px 14px #0008!important}
+.lb-controls button.primary{background:linear-gradient(135deg,#ff3038,#a50d1a)!important;border-color:#ff5961!important}
+.lb-controls #cal{border-color:#ff3038!important}
+.lb-controls button:active{transform:translateY(1px);filter:brightness(1.2)}
+.lb-controls button:focus-visible{outline:2px solid #ff9f1c;outline-offset:2px}
+#notice{margin:6px 5px 10px;color:#c5cfdd}
+@media(max-width:360px){.lb-controls{grid-template-columns:1fr!important}.lb-controls button{width:100%}}
+</style>
+</head><body><header><div class="logo">MOTO<span>LEAN</span></div><div class="tagline">SMART RIDE · LEAN ANGLE SYSTEM</div></header><main><section class="lb-hero" id="leanBikePanel">
+<div class="lb-head"><span>LEANBIKE · MOTOLEAN</span><span id="lbSensorState">SENSOR</span></div>
+<div class="lb-stage"><div class="lb-scale left"><b>60°</b><b>30°</b><b>0°</b></div><div class="lb-model"><div class="lb-pointer left" id="lbPointerLeft"></div><model-viewer id="moto3d" src="./adventure-motorcycle.glb" alt="Modelo 3D de motocicleta" touch-action="pan-y" shadow-intensity="1" exposure="1" interaction-prompt="none" environment-image="neutral"></model-viewer><div class="lb-pointer right" id="lbPointerRight"></div></div><div class="lb-scale right"><b>60°</b><b>30°</b><b>0°</b></div></div>
+<div class="lb-legend"><span><i class="lb-dot green"></i>0–20° · SUAVE</span><span><i class="lb-dot orange"></i>20–40° · MEDIO</span><span><i class="lb-dot red"></i>40°+ · ALTO</span></div>
+<div class="lb-ground"></div><div class="lb-readings"><div class="lb-reading left"><label>LEFT LEAN</label><strong id="lbLeft">0°</strong><div class="lb-underline"></div></div><div class="lb-reading right"><label>RIGHT LEAN</label><strong id="lbRight">0°</strong><div class="lb-underline"></div></div></div>
+<div class="lb-stats"><div class="lb-stat"><small>INCLINACIÓN ACTUAL</small><b id="lbCurrent">0°</b></div><div class="lb-stat"><small>MÁX. IZQUIERDA</small><b class="red" id="lbMaxLeft">0°</b></div><div class="lb-stat"><small>MÁX. DERECHA</small><b class="green" id="lbMaxRight">0°</b></div></div><p class="hint" id="modelStatus">Cargando modelo 3D…</p></section>
+<section class="card"><div class="status"><b>MI MOTOCICLETA</b><span class="pill">PERFIL PERSONALIZADO</span></div><div class="grid" style="margin-top:13px"><div class="field"><label>MARCA</label><select id="brand"></select></div><div class="field"><label>MODELO</label><select id="model"></select></div><div class="field"><label>CATEGORÍA</label><select id="category"><option>Trail / Adventure</option><option>Sport / Supersport</option><option>Naked</option><option>Touring</option><option>Custom / Cruiser</option><option>Clásica / Retro</option><option>Scooter</option><option>Enduro / Motocross</option><option>Supermoto</option><option>Eléctrica</option><option>Otra</option></select></div><div class="field"><label>AÑO / VERSIÓN</label><input id="year" placeholder="Ej. 2025 Euro 5+"></div></div><div class="bike"><span>🏍️</span><div><b id="bikeName">Voge 525DSX</b><small id="bikeSub">Trail / Adventure · perfil de moto</small></div></div><p class="hint">Catálogo amplio de modelos conocidos. Las gamas cambian por año y país; añade aquí una versión que falte.</p></section>
+<div class="lb-controls actions" aria-label="Controles del inclinómetro">
+<button class="primary" id="start">◉ ACTIVAR SENSOR</button><button id="cal">⚙ CALIBRAR CERO</button><button id="demo">▶ MODO DEMO</button><button id="record">● INICIAR REGISTRO</button>
+</div>
+<p class="hint" id="notice">Pulsa ACTIVAR SENSOR y acepta el permiso de movimiento de iOS si aparece.</p>
+<div id="legacySensorState" hidden><i id="led" class="led"></i><span id="status">Sensor sin iniciar</span><span id="mode">MODO CALLE</span><span id="left">0.0°</span><span id="right">0.0°</span><span id="duration">00:00</span></div>
+
+<section class="card" id="settingsPanel"><div class="label">CONFIGURACIÓN DEL INCLINÓMETRO</div>
+<div class="field" style="margin-bottom:12px"><label for="sensitivity">SENSIBILIDAD DEL MOVIMIENTO <span id="sensitivityValue">1.0×</span></label><input id="sensitivity" type="range" min="0.5" max="1.5" step="0.1" value="1" style="width:100%;accent-color:#ff3038"></div>
+<div class="grid">
+<div class="field"><label for="orangeThreshold">AVISO NARANJA (°)</label><input id="orangeThreshold" type="number" min="5" max="50" value="20"></div>
+<div class="field"><label for="redThreshold">AVISO ROJO (°)</label><input id="redThreshold" type="number" min="10" max="60" value="40"></div>
+<div class="field"><label for="modelScale">TAMAÑO DE MOTO 3D</label><input id="modelScale" type="range" min="0.7" max="1.4" step="0.1" value="1" style="width:100%;accent-color:#ff3038"></div>
+<div class="field"><label for="autoRotate">GIRO AUTOMÁTICO</label><select id="autoRotate"><option value="off">Desactivado</option><option value="on">Activado</option></select></div>
+</div>
+<div class="actions"><button id="saveSettings" class="primary">GUARDAR AJUSTES</button><button id="resetSettings">RESTABLECER</button></div>
+<p class="hint" id="settingsNotice">Los umbrales son referencias visuales personalizables, no límites de seguridad.</p></section>
+<div class="label">HERRAMIENTAS DE PILOTAJE</div><div class="tiles"><button class="tile" id="orientation"><i>📱</i>ORIENTACIÓN<small>Datos de posición del iPhone</small></button><button class="tile" id="handlebar"><i>🏍️</i>CALIBRAR MANILLAR<small>Guarda la posición neutra</small></button><button class="tile" id="export"><i>📈</i>EXPORTAR SESIÓN<small>Descarga los datos en CSV</small></button><button class="tile" id="reset"><i>↺</i>REINICIAR MÁXIMOS<small>Reinicia las estadísticas</small></button></div>
+<section class="card info"><div class="label">TELEMETRÍA DEL SENSOR</div><div id="sensorInfo">Beta: — · Gamma: — · Orientación: —</div><div class="label" style="margin-top:15px">REGISTRO RECIENTE</div><div class="log" id="log">Todavía no hay datos registrados.</div></section><section class="card info"><b>SEGURIDAD</b><br>Prototipo web, no instrumento certificado. La lectura depende de cómo se sujete y calibre el iPhone. Calibra con la moto parada y vertical. No manipules ni consultes el teléfono mientras conduces.</section></main><footer><span><b>⌁</b>LEAN ANGLE</span><span><b>◎</b>SENSOR</span><span><b>▤</b>REGISTRO</span><span><b>⚙</b>AJUSTES</span></footer>
+<script>
+const CATALOG={"Aprilia": ["RS 125", "RS 457", "RS 660", "RSV4", "Tuono 660", "Tuareg 660"], "Benelli": ["BN 125", "Leoncino 500", "Leoncino 800", "TRK 502", "TRK 702", "TRK 702 X"], "BMW Motorrad": ["G 310 GS", "F 800 GS", "F 900 GS", "R 1300 GS", "R 1300 GS Adventure", "S 1000 RR", "S 1000 XR"], "CFMOTO": ["450NK", "450SR", "450MT", "675SR-R", "700MT", "800MT", "800MT-X"], "Ducati": ["Monster", "DesertX", "Multistrada V2", "Multistrada V4", "Panigale V2", "Panigale V4", "Streetfighter V4"], "Harley-Davidson": ["Nightster", "Sportster S", "Low Rider S", "Fat Boy", "Street Glide", "Road Glide", "Pan America 1250"], "Honda": ["CB125R", "CB500 Hornet", "CB650R", "CB750 Hornet", "CBR650R", "CBR1000RR-R Fireblade", "NX500", "XL750 Transalp", "CRF1100L Africa Twin", "NC750X", "X-ADV", "Forza 350", "Rebel 500", "Gold Wing"], "Husqvarna": ["Svartpilen 401", "Norden 901", "701 Enduro", "701 Supermoto", "TE 300", "FE 350"], "Indian": ["Scout", "Scout Bobber", "Chief", "Chieftain", "Roadmaster", "FTR"], "Kawasaki": ["Z500", "Z650", "Z900", "Ninja 500", "Ninja ZX-6R", "Ninja ZX-10R", "Versys 650", "Versys 1100", "KLE500", "Z900RS"], "KTM": ["125 Duke", "390 Duke", "790 Duke", "990 Duke", "1390 Super Duke R", "390 Adventure", "690 Enduro R", "790 Adventure", "890 Adventure R", "1290 Super Adventure S"], "Kymco": ["Agility City 125", "X-Town 300", "AK 550", "CV3 550", "DTX 360"], "Moto Guzzi": ["V7 Stone", "V85 TT", "V100 Mandello", "Stelvio"], "MV Agusta": ["Brutale 800", "Dragster 800", "F3 800", "Superveloce 800"], "Piaggio": ["Liberty 125", "Medley 125", "Beverly 400", "MP3 530"], "Royal Enfield": ["Hunter 350", "Classic 350", "Himalayan 450", "Interceptor 650", "Continental GT 650", "Shotgun 650", "Super Meteor 650"], "Suzuki": ["GSX-8S", "GSX-8R", "GSX-S1000", "GSX-R600", "GSX-R750", "GSX-R1000R", "V-Strom 650", "V-Strom 800DE", "V-Strom 1050", "Hayabusa", "SV650", "Burgman 400"], "Triumph": ["Speed 400", "Trident 660", "Daytona 660", "Street Triple 765", "Tiger 900", "Tiger 1200", "Bonneville T120", "Scrambler 1200", "Rocket 3"], "Voge": ["125R", "300AC", "300 Rally", "300DS", "500AC", "525R", "525DSX", "625DSX", "650DSX", "800DS Rally", "900DSX", "900R", "SR1", "SR4"], "Yamaha": ["MT-125", "MT-03", "MT-07", "MT-09", "MT-10", "R125", "R3", "R7", "R1", "Tracer 7", "Tracer 9", "Tenere 700", "TMAX", "XMAX 300", "NMAX 125", "XSR900"], "Zontes": ["125 GK", "125 U", "350 D", "350 E", "350 GK", "350 T", "368 G", "703 F", "703 R", "703 RR"], "QJMotor": ["SRK 400", "SRK 600", "SRK 800", "SRV 550", "SRT 700", "SRT 800", "SRT 900 SX"], "SYM": ["Jet X 125", "Cruisym 300", "Maxsym TL 508", "ADX 300", "Joymax Z+"], "Macbor": ["Eight Mile 125", "Rockster 125", "Montana XR1", "Montana XR5"], "Rieju": ["Aventura 125", "Aventura 500", "Aventura 707", "MRT 50", "MR 300"], "Beta": ["RR 2T 300", "RR 4T 350", "RR 4T 390", "RR 4T 430", "Xtrainer 300"], "GasGas": ["ES 700", "SM 700", "EC 250", "EC 300", "MC 450F"], "Keeway": ["RKF 125", "V302C", "K-Light 202", "Vieste 300"], "Fantic": ["Caballero 125", "Caballero 500", "Caballero 700"], "Zero Motorcycles": ["FXE", "DS", "DSR", "SR/F", "SR/S"], "Super Soco": ["TC Max", "TS Street Hunter", "CPx"], "Peugeot Motocycles": ["Tweet 125", "Pulsion 125", "XP400"], "Segway": ["E300SE", "Xyber", "X260"], "Otra marca": ["Otro modelo (escribir versión abajo)"]}, $=id=>document.getElementById(id),brand=$('brand'),model=$('model');
+Object.keys(CATALOG).sort((a,b)=>a.localeCompare(b,'es')).forEach(b=>{let o=new Option(b,b);brand.add(o)});
+function profile(){ $('bikeName').textContent=brand.value+' '+model.value;$('bikeSub').textContent=$('category').value+' · '+($('year').value.trim()||'perfil de moto');try{localStorage.setItem('mlprof',JSON.stringify({b:brand.value,m:model.value,c:$('category').value,y:$('year').value}))}catch(e){}}
+function fill(pref){model.innerHTML='';(CATALOG[brand.value]||[]).forEach(m=>model.add(new Option(m,m)));if(pref&&[...model.options].some(o=>o.value===pref))model.value=pref;profile()}
+brand.onchange=()=>fill();model.onchange=profile;$('category').onchange=profile;$('year').oninput=profile;
+try{let s=JSON.parse(localStorage.getItem('mlprof')||'null');if(s&&CATALOG[s.b])brand.value=s.b;fill(s&&s.m);if(s){$('category').value=s.c||'Trail / Adventure';$('year').value=s.y||'';profile()}else{brand.value='Voge';fill('525DSX')}}catch(e){brand.value='Voge';fill('525DSX')}
+let running=false,dem=false,rec=false,zero=0,off=0,beta=0,gamma=0,orient=0,a=0,l=0,r=0,start=0,rows=[],phase=0,tm,last=0;
+function st(t,on){$('status').textContent=t;$('led').classList.toggle('on',!!on)}
+function fmt(s){s=Math.floor(s);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function draw(){
+ a=Math.max(-90,Math.min(90,a));
+ $('left').textContent=l.toFixed(1)+'°';$('right').textContent=r.toFixed(1)+'°';$('duration').textContent=rec?fmt((Date.now()-start)/1000):'00:00';$('sensorInfo').textContent=`Beta: ${beta.toFixed(1)}° · Gamma: ${gamma.toFixed(1)}° · Orientación: ${orient}°`;
+}
+function upd(){
+ const mv=$('moto3d'), lean=Math.max(-60,Math.min(60,a*sensitivity));
+ if(mv){
+   // Inclina el modelo sobre su eje lateral; cámara fija, sin giro de vista.
+   mv.orientation=`${lean}deg 0deg 0deg`;
+   const z=document.getElementById('modelScale');
+   mv.style.transform=`scale(${z?z.value:1})`;
+   mv.autoRotate=false;
+ }
+ const ll=$('lbLeft'),rr=$('lbRight'),cc=$('lbCurrent'),ml=$('lbMaxLeft'),mr=$('lbMaxRight');
+ if(ll)ll.textContent=Math.max(0,-a).toFixed(0)+'°';if(rr)rr.textContent=Math.max(0,a).toFixed(0)+'°';
+ const mag=Math.abs(a), rangeColor=mag<orangeThreshold?'#27ed70':(mag<redThreshold?'#ff9f1c':'#ff3038');
+ if(ll)ll.style.color=a<0?rangeColor:'#27ed70';if(rr)rr.style.color=a>0?rangeColor:'#27ed70';
+ if(cc){cc.textContent=(a>0?'+':'')+a.toFixed(0)+'°';cc.style.color=rangeColor;}
+ if(ml)ml.textContent=Math.max(l,Math.max(0,-a)).toFixed(0)+'°';if(mr)mr.textContent=Math.max(r,Math.max(0,a)).toFixed(0)+'°';
+ // Flechas verdes siempre visibles: suben y bajan junto con la inclinación, sin girar.
+ const markerTop=Math.max(9,Math.min(91,50-(Math.max(-60,Math.min(60,a))/60)*39))+'%';
+ for(const id of ['lbPointerLeft','lbPointerRight']){const p=$(id);if(p){p.style.display='block';p.style.top=markerTop;p.style.filter='drop-shadow(0 0 6px #28f06c)';}}
+ l=Math.max(l,Math.max(0,-a));r=Math.max(r,Math.max(0,a));
+ if(rec){let n=Date.now();rows.push([new Date(n).toISOString(),a.toFixed(2),beta.toFixed(2),gamma.toFixed(2),orient]);if(n-last>1000){last=n;$('log').textContent=rows.slice(-6).map(x=>x[0].slice(11,19)+'  '+x[1]+'°').join('\n')}}
+ draw();
+}
+function sensor(e){beta=Number.isFinite(e.beta)?e.beta:0;gamma=Number.isFinite(e.gamma)?e.gamma:0;orient=screen.orientation?.angle||0;a=gamma-zero-off;upd()}
+$('start').onclick=async()=>{try{if(!window.DeviceOrientationEvent)throw 0;if(DeviceOrientationEvent.requestPermission&&await DeviceOrientationEvent.requestPermission()!=='granted'){st('Permiso denegado');return}window.addEventListener('deviceorientation',sensor,true);running=true;dem=false;st('Sensor activo',true);$('mode').textContent='SENSOR REAL';$('notice').textContent='Con la moto parada y vertical, pulsa CALIBRAR CERO.'}catch(e){st('No se pudo activar');$('notice').textContent='Prueba Safari con HTTPS y revisa permisos de movimiento.'}};
+$('cal').onclick=()=>{zero=gamma;off=0;a=0;l=r=0;upd();$('notice').textContent='Cero calibrado a 0°. Mantén el teléfono en la posición neutra de montaje.';st('Cero calibrado',true)};$('handlebar').onclick=()=>{zero=gamma;off=0;a=0;upd();$('notice').textContent='Manillar calibrado: esta posición se toma como 0°.';st('Manillar calibrado',true)};
+$('demo').onclick=()=>{if(running){removeEventListener('deviceorientation',sensor,true);running=false}dem=!dem;if(dem){st('Modo demostración',true);$('mode').textContent='MODO DEMO';$('notice').textContent='Valores simulados, no proceden del sensor.';tm=setInterval(()=>{phase+=.07;a=28*Math.sin(phase);beta=3*Math.cos(phase);gamma=a;upd()},80)}else{clearInterval(tm);a=0;st('Sensor sin iniciar');$('mode').textContent='MODO CALLE';upd()}};
+$('record').onclick=()=>{rec=!rec;if(rec){rows=[];start=Date.now();last=0;$('record').textContent='■ DETENER REGISTRO';$('notice').textContent='Registro iniciado. No interactúes con el móvil mientras conduces.'}else{$('record').textContent='● INICIAR REGISTRO';$('log').textContent=rows.slice(-8).map(x=>x[0].slice(11,19)+'  '+x[1]+'°').join('\n')||'No hay datos.'}upd()};
+$('orientation').onclick=()=>alert(`Pantalla ${orient}° · Beta ${beta.toFixed(1)}° · Gamma ${gamma.toFixed(1)}°`);
+$('export').onclick=()=>{if(!rows.length){alert('Inicia el registro primero.');return}let csv='fecha_hora,inclinacion,beta,gamma,orientacion\n'+rows.map(x=>x.join(',')).join('\n'),u=URL.createObjectURL(new Blob([csv],{type:'text/csv'})),a=document.createElement('a');a.href=u;a.download='motolean-sesion.csv';a.click();URL.revokeObjectURL(u)};
+$('reset').onclick=()=>{l=r=0;upd();$('log').textContent='Máximos reiniciados.'};addEventListener('pagehide',()=>{removeEventListener('deviceorientation',sensor,true);clearInterval(tm)});draw();
+</script><script id="MotoLeanSettings">
+// Configuración persistente de MotoLean
+let sensitivity=1, orangeThreshold=20, redThreshold=40;
+function applySettings(){
+ const s=document.getElementById('sensitivity'), o=document.getElementById('orangeThreshold'), r=document.getElementById('redThreshold'), z=document.getElementById('modelScale'), ar=document.getElementById('autoRotate');
+ if(s){sensitivity=Number(s.value)||1;document.getElementById('sensitivityValue').textContent=sensitivity.toFixed(1)+'×';}
+ if(o)orangeThreshold=Math.max(5,Math.min(50,Number(o.value)||20));
+ if(r)redThreshold=Math.max(orangeThreshold+1,Math.min(60,Number(r.value)||40));
+ if(o)o.value=orangeThreshold;if(r)r.value=redThreshold;
+ const mv=document.getElementById('moto3d');if(mv){mv.style.setProperty('--ml-model-scale',z?z.value:1);mv.style.transform=`scale(${z?z.value:1})`;mv.orientation=`${Math.max(-60,Math.min(60,a*sensitivity))}deg 0deg 0deg`;if(ar)ar.value='off';mv.autoRotate=false;}
+ try{localStorage.setItem('mlsettings',JSON.stringify({sensitivity,orangeThreshold,redThreshold,modelScale:z?z.value:1,autoRotate:ar?ar.value:'off'}));}catch(e){}
+ if(typeof upd==='function')upd();const n=document.getElementById('settingsNotice');if(n)n.textContent='Ajustes guardados en este dispositivo.';
+}
+(function initSettings(){try{const v=JSON.parse(localStorage.getItem('mlsettings')||'null');if(v){if(document.getElementById('sensitivity'))document.getElementById('sensitivity').value=v.sensitivity??1;if(document.getElementById('orangeThreshold'))document.getElementById('orangeThreshold').value=v.orangeThreshold??20;if(document.getElementById('redThreshold'))document.getElementById('redThreshold').value=v.redThreshold??40;if(document.getElementById('modelScale'))document.getElementById('modelScale').value=v.modelScale??1;if(document.getElementById('autoRotate'))document.getElementById('autoRotate').value=v.autoRotate??'off';}}catch(e){}
+ const s=document.getElementById('sensitivity');if(s)s.addEventListener('input',()=>{document.getElementById('sensitivityValue').textContent=Number(s.value).toFixed(1)+'×';});
+ const save=document.getElementById('saveSettings');if(save)save.onclick=applySettings;
+ const reset=document.getElementById('resetSettings');if(reset)reset.onclick=()=>{document.getElementById('sensitivity').value=1;document.getElementById('orangeThreshold').value=20;document.getElementById('redThreshold').value=40;document.getElementById('modelScale').value=1;document.getElementById('autoRotate').value='off';applySettings();};
+ applySettings();})();
+</script>
+<script>const motoViewer=document.getElementById('moto3d');if(motoViewer){motoViewer.addEventListener('load',()=>{const s=document.getElementById('modelStatus');if(s)s.textContent='Modelo 3D cargado. Inclina suavemente el iPhone para comprobar el movimiento.';});motoViewer.addEventListener('error',()=>{const s=document.getElementById('modelStatus');if(s)s.textContent='No se ha podido cargar el modelo. Comprueba que adventure-motorcycle.glb esté en la raíz del repositorio.';});}</script><script id="MotoLeanModelFeedback">(()=>{const m=document.getElementById('moto3d');if(!m)return;m.addEventListener('load',()=>{const s=document.getElementById('modelStatus');if(s)s.textContent='Modelo 3D cargado. Prueba la inclinación con el iPhone quieto.'});m.addEventListener('error',()=>{const s=document.getElementById('modelStatus');if(s)s.textContent='No se pudo cargar adventure-motorcycle.glb. Comprueba que esté en la raíz del repositorio.'})})();</script><script id="leanBikeFeedback">(()=>{const mv=document.getElementById('moto3d');if(!mv)return;mv.addEventListener('load',()=>{const s=document.getElementById('modelStatus');if(s)s.textContent='Modelo 3D cargado. Prueba la inclinación con el teléfono quieto.'});mv.addEventListener('error',()=>{const s=document.getElementById('modelStatus');if(s)s.textContent='No se pudo cargar el GLB. Comprueba que adventure-motorcycle.glb está en la raíz del repositorio.'})})();</script>
+<script id="leanBikeSensorStateSync">(()=>{const old=document.getElementById('status'),badge=document.getElementById('lbSensorState');if(!old||!badge)return;const update=()=>{const t=old.textContent||'SENSOR';badge.textContent=t.toUpperCase();badge.style.color=/activo|calibrado|demo/i.test(t)?'#28f06c':/denegado|no se pudo/i.test(t)?'#ff3038':'#55a8ff'};new MutationObserver(update).observe(old,{childList:true,characterData:true,subtree:true});update()})();</script>
+</body></html>
